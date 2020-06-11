@@ -1,0 +1,105 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" 启用vundle来管理vim插件
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'scrooloose/nerdtree'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'majutsushi/tagbar'
+call vundle#end()           
+filetype plugin on    " required
+
+" "  Plugin config
+" " :PluginList       - 查看已经安装的插件
+" " :PluginInstall    - 安装插件
+" " :PluginUpdate     - 更新插件
+" " :PluginSearch     - 搜索插件，例如 :PluginSearch xml就能搜到xml相关的插件
+" " :PluginClean      - 删除插件，把安装插件对应行删除，然后执行这个命令即可
+"
+" " h: vundle         - 获取帮助
+"
+" " vundle的配置到此结束，下面是你自己的配置
+
+
+"--------------NERDTree-------------
+" open a NERDTree automatically when vim starts up
+" autocmd vimenter * NERDTree
+"open a NERDTree automatically when vim starts up if no files were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"open NERDTree automatically when vim starts up on opening a directory
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" map F2 to open NERDTree
+map <F2> :NERDTreeToggle<CR>
+" close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
+"-------------Vim Config-------------
+set ic
+set hlsearch
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,GB2312,big5
+set cursorline
+set autoindent
+set smartindent
+set scrolloff=4
+set showmatch
+set nu! "显示行号
+syntax on "代码高亮
+set ts=4 "tab键设为4空格
+nnoremap ww :w<CR>
+nnoremap wq :wq<CR>
+nnoremap qq :q<CR>
+" let g:gothan_termtrans=1
+" hi Normal ctermbg=darkblue ctermfg=white guibg=White guifg=Black
+colorscheme gotham
+
+"-------------Tagbar-----------------
+let g:tagbar_autofocus = 1"
+nmap <F9> :TagbarToggle<CR>
+
+"--------- YouCompleteMe-------------
+highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
+highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
+set completeopt=menu,menuone
+let g:ycm_add_preview_to_completeopt = 0
+nnoremap gl :YcmCompleter GoToDeclaration<CR>
+nnoremap gf :YcmCompleter GoToDefinition<CR>
+nnoremap gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+
+
+"------------Start Python PEP 8 stuff----------------
+" Number of spaces that a pre-existing tab is equal to.
+au BufRead,BufNewFile *py,*pyw,*.c,*.h set tabstop=4
+
+"spaces for indents
+au BufRead,BufNewFile *.py,*pyw set shiftwidth=4
+au BufRead,BufNewFile *.py,*.pyw set expandtab
+au BufRead,BufNewFile *.py set softtabstop=4
+
+" Use the below highlight group when displaying bad whitespace is desired.
+highlight BadWhitespace ctermbg=red guibg=red
+
+" Display tabs at the beginning of a line in Python mode as bad.
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+" Make trailing whitespace be flagged as bad.
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" Wrap text after a certain number of characters
+"au BufRead,BufNewFile *.py,*.pyw, set textwidth=100
+
+" Use UNIX (\n) line endings.
+au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
+
+" Set the default file encoding to UTF-8:
+set encoding=utf-8
+
+" For full syntax highlighting:
+let python_highlight_all=1
+syntax on
+
