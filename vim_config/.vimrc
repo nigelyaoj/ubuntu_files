@@ -8,6 +8,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'majutsushi/tagbar'
+Plugin 'tell-k/autopep8'
 call vundle#end()           
 filetype plugin on    " required
 
@@ -39,6 +40,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 
 "-------------Vim Config-------------
+"setting for editting
 set ic
 set hlsearch
 set encoding=utf-8
@@ -48,15 +50,33 @@ set autoindent
 set smartindent
 set scrolloff=4
 set showmatch
+set mouse=a " support for mouse
 set nu! "显示行号
 syntax on "代码高亮
 set ts=4 "tab键设为4空格
+set clipboard=unnamed
+
+" make backspaces more powerfull
+set backspace=indent,eol,start
+
+
+" save and quit
 nnoremap ww :w<CR>
 nnoremap wq :wq<CR>
 nnoremap qq :q<CR>
-" let g:gothan_termtrans=1
-" hi Normal ctermbg=darkblue ctermfg=white guibg=White guifg=Black
+nnoremap <C-f> :/
+
+" split navigations
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-U> <C-W><C-K>
+nnoremap <C-J> <C-W><C-J>
+
+" source vimrc
+nnoremap <F5> :source $MYVIMRC<CR>
+" color scheme
 colorscheme gotham
+
 
 "-------------Tagbar-----------------
 let g:tagbar_autofocus = 1"
@@ -66,7 +86,13 @@ nmap <F9> :TagbarToggle<CR>
 highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
 highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
 set completeopt=menu,menuone
-let g:ycm_add_preview_to_completeopt = 0
+
+
+let g:ycm_cache_omnifunc=1 "使用缓存
+let g:ycm_complete_in_comments=1 "注释补全
+let g:ycm_add_preview_to_completeopt = 0 
+let g:ycm_seed_identifiers_with_syntax=1 "语法关键字补全
+
 nnoremap gl :YcmCompleter GoToDeclaration<CR>
 nnoremap gf :YcmCompleter GoToDefinition<CR>
 nnoremap gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
