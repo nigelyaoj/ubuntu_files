@@ -8,7 +8,11 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'majutsushi/tagbar'
-Plugin 'tell-k/autopep8'
+" Plugin 'tell-k/autopep8'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'nathanaelkane/vim-indent-guides'
+
+
 call vundle#end()           
 filetype plugin on    " required
 
@@ -46,15 +50,43 @@ set hlsearch
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,GB2312,big5
 set cursorline
+set cursorcolumn
 set autoindent
 set smartindent
 set scrolloff=4
 set showmatch
 set mouse=a " support for mouse
+set laststatus=2
+
 set nu! "显示行号
+
+syntax enable
 syntax on "代码高亮
-set ts=4 "tab键设为4空格
-set clipboard=unnamed
+" 开启实时搜索功能
+
+" 自适应不同语言的智能缩进
+filetype indent on
+" 将制表符扩展为空格
+set expandtab
+" 设置编辑时制表符占用空格数
+set tabstop=4
+" 设置格式化时制表符占用空格数
+set shiftwidth=4
+" 让 vim 把连续数量的空格视为一个制表符
+
+set softtabstop=4
+set incsearch
+" " 搜索时大小写不敏感
+set ignorecase
+" " 关闭兼容模式
+set nocompatible
+" " vim 自身命令行模式智能补全
+set wildmenu
+
+" 开启文件类型侦测
+filetype on
+" " 根据侦测到的不同类型加载对应的插件
+filetype plugin on
 
 " make backspaces more powerfull
 set backspace=indent,eol,start
@@ -74,8 +106,34 @@ nnoremap <C-J> <C-W><C-J>
 
 " source vimrc
 nnoremap <F5> :source $MYVIMRC<CR>
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
 " color scheme
 colorscheme gotham
+
+"-------------Poweerline-----------------
+
+let g:Powerline_colorscheme='solarized256'
+
+
+"-------------Indent_guides-----------------
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_enable_on_vim_startup=1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=darkgrey
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
+nnoremap <F4> <Plug>IndentGuidesToggle
+
+
+"-------------code fold----------------
+" 基于缩进或语法进行代码折叠
+" set foldmethod=indent
+set foldmethod=syntax
+" 启动 vim 时关闭折叠代码
+set nofoldenable
+
 
 
 "-------------Tagbar-----------------

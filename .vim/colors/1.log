@@ -1,0 +1,66 @@
+4c4
+< "                     | | __| | | | | | |  _  ||  _  || |\/| |
+---
+> "                     | | __| | | | | | |  _  ||  _  || |\/| | -256
+10c10
+< " Version: 1.0.0
+---
+> " Version: ϡ
+19c19
+< let g:colors_name = 'gotham'
+---
+> let g:colors_name = 'gotham256'
+20a21,23
+> if !(has('termguicolors') && &termguicolors) && !has('gui_running') && &t_Co != 256
+>   finish
+> endif
+71,78c74,81
+< let s:colors.base0 = { 'gui': '#0c1014', 'cterm': 0 }
+< let s:colors.base1 = { 'gui': '#11151c', 'cterm': 8 }
+< let s:colors.base2 = { 'gui': '#091f2e', 'cterm': 10 }
+< let s:colors.base3 = { 'gui': '#0a3749', 'cterm': 12 }
+< let s:colors.base4 = { 'gui': '#1e6479', 'cterm': 11 }
+< let s:colors.base5 = { 'gui': '#599cab', 'cterm': 14 }
+< let s:colors.base6 = { 'gui': '#99d1ce', 'cterm': 7 }
+< let s:colors.base7 = { 'gui': '#d3ebe9', 'cterm': 15 }
+---
+> let s:colors.base0 = { 'gui': '#0c1014', 'cterm': 232 }
+> let s:colors.base1 = { 'gui': '#11151c', 'cterm': 233 }
+> let s:colors.base2 = { 'gui': '#091f2e', 'cterm': 17  }
+> let s:colors.base3 = { 'gui': '#0a3749', 'cterm': 18  }
+> let s:colors.base4 = { 'gui': '#1e6479', 'cterm': 31  }
+> let s:colors.base5 = { 'gui': '#599cab', 'cterm': 81  }
+> let s:colors.base6 = { 'gui': '#99d1ce', 'cterm': 122 }
+> let s:colors.base7 = { 'gui': '#d3ebe9', 'cterm': 194 }
+81,88c84,91
+< let s:colors.red     = { 'gui': '#c23127', 'cterm': 1  }
+< let s:colors.orange  = { 'gui': '#d26937', 'cterm': 9  }
+< let s:colors.yellow  = { 'gui': '#edb443', 'cterm': 3  }
+< let s:colors.magenta = { 'gui': '#888ca6', 'cterm': 13 }
+< let s:colors.violet  = { 'gui': '#4e5166', 'cterm': 5  }
+< let s:colors.blue    = { 'gui': '#195466', 'cterm': 4  }
+< let s:colors.cyan    = { 'gui': '#33859E', 'cterm': 6  }
+< let s:colors.green   = { 'gui': '#2aa889', 'cterm': 2  }
+---
+> let s:colors.red     = { 'gui': '#c23127', 'cterm': 124 }
+> let s:colors.orange  = { 'gui': '#d26937', 'cterm': 166 }
+> let s:colors.yellow  = { 'gui': '#edb443', 'cterm': 214 }
+> let s:colors.magenta = { 'gui': '#888ca6', 'cterm': 67  }
+> let s:colors.violet  = { 'gui': '#4e5166', 'cterm': 60  }
+> let s:colors.blue    = { 'gui': '#195466', 'cterm': 24  }
+> let s:colors.cyan    = { 'gui': '#33859E', 'cterm': 44  }
+> let s:colors.green   = { 'gui': '#2aa889', 'cterm': 78  }
+165c168
+< call s:Col('VertSplit', 'blue', s:linenr_background)
+---
+> call s:Col('VertSplit', 'base2', s:linenr_background)
+261,269d263
+< " ale https://github.com/w0rp/ale
+< call s:Col('ALEWarningSign', 'yellow', s:linenr_background)
+< call s:Col('ALEErrorSign', 'red', s:linenr_background)
+< 
+< " neomake https://github.com/neomake/neomake
+< call s:Col('NeomakeWarningSign', 'yellow', s:linenr_background)
+< call s:Col('NeomakeErrorSign', 'red', s:linenr_background)
+< call s:Col('NeomakeWarning', 'yellow')
+< call s:Col('NeomakeError', 'red')
